@@ -1,0 +1,39 @@
+{{define "index"}}
+{{template "header"}}
+
+<div class="m-3">
+  <a type="create" id="" class="btn btn-primary" href="/crear" role="button">New</a>
+</div>
+
+<div class="m-1">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre Apellidos</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range.}}
+      <tr>
+        <td>{{.Id}}</td>
+        <td>{{.Nombre}}</td>
+        <td>{{.Correo}}</td>
+        <td>
+
+          <a type="button" class="btn btn-warning" name="" href="/edit?id={{.Id}}">Edit</a> |
+          <a type="button" class="btn btn-danger" name="" href="/delete?id={{.Id}}">Delete</a>
+        </td>
+
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</div>
+
+
+{{template "footer"}}
+
+{{end}}

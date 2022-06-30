@@ -1,0 +1,12 @@
+{
+    "import":"app-employe",
+    "GoVersion":"go1.18.3",
+    "GodeVersion":"v74",
+    "packages":[
+        "./..."
+    ],
+    "Deps":[
+        
+    ]
+
+}
