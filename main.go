@@ -13,12 +13,13 @@ import (
 )
 
 func conexionDB() (conexion *sql.DB) {
-	Driver := "mysql"
-	Usuario := "root"
-	Contrasenia := "sasa"
-	Nombre := "sistema"
 
-	conexion, err := sql.Open(Driver, Usuario+":"+Contrasenia+"@tcp(127.0.0.1)/"+Nombre)
+	Driver := "mysql"
+	Usuario := "b00f0dbac5eee8"
+	Contrasenia := "583dad4b"
+	Nombre := "heroku_1d5f0e20d0bc919"
+
+	conexion, err := sql.Open(Driver, Usuario+":"+Contrasenia+"@tcp(us-cdbr-east-06.cleardb.net)/"+Nombre)
 	if err != nil {
 		panic(err.Error())
 	}
