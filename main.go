@@ -13,11 +13,11 @@ import (
 )
 
 func conexionDB() (conexion *sql.DB) {
-
+	//mysql://b88d0a8e947584:823ea48f@us-cdbr-east-06.cleardb.net/heroku_8c0816ad800ce51?reconnect=true
 	Driver := "mysql"
-	Usuario := "b00f0dbac5eee8"
-	Contrasenia := "583dad4b"
-	Nombre := "heroku_1d5f0e20d0bc919"
+	Usuario := "b88d0a8e947584"
+	Contrasenia := "823ea48f"
+	Nombre := "heroku_8c0816ad800ce51"
 
 	conexion, err := sql.Open(Driver, Usuario+":"+Contrasenia+"@tcp(us-cdbr-east-06.cleardb.net)/"+Nombre)
 	if err != nil {
