@@ -1,7 +1,7 @@
 {
-    "import":"app-employe",
+    "ImportPath":"app-employe",
     "GoVersion":"go1.18.3",
-    "GodeVersion":"v74",
+    "GodepVersion":"v74",
     "packages":[
         "./..."
     ],
