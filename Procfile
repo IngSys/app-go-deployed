@@ -1,1 +1,1 @@
-web:app-employe
+web:bin/sistema

@@ -1,5 +1,5 @@
 {
-    "ImportPath":"app-employe",
+    "ImportPath":"sistema",
     "GoVersion":"go1.18.3",
     "GodepVersion":"v74",
     "packages":[
