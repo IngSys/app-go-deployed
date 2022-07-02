@@ -1,1 +1,1 @@
-web:bin/sistema
+web: sistema
