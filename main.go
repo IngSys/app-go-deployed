@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -13,13 +12,27 @@ import (
 )
 
 func conexionDB() (conexion *sql.DB) {
-	//mysql://b88d0a8e947584:823ea48f@us-cdbr-east-06.cleardb.net/heroku_8c0816ad800ce51?reconnect=true
+
+	/*---------------------------------------*/
+	//            CREDENCIALES DE LOCAL
+	/*---------------------------------------*/
 	Driver := "mysql"
+	Usuario := "root"
+	Contrasenia := "sasa"
+	Nombre := "sistema"
+
+	conexion, err := sql.Open(Driver, Usuario+":"+Contrasenia+"@tcp(127.0.0.1)/"+Nombre)
+
+	/*---------------------------------------*/
+	//            CREDENCIALES DE HEROKU
+	/*---------------------------------------*/
+	////mysql://b88d0a8e947584:823ea48f@us-cdbr-east-06.cleardb.net/heroku_8c0816ad800ce51?reconnect=true
+	/*Driver := "mysql"
 	Usuario := "b88d0a8e947584"
 	Contrasenia := "823ea48f"
 	Nombre := "heroku_8c0816ad800ce51"
 
-	conexion, err := sql.Open(Driver, Usuario+":"+Contrasenia+"@tcp(us-cdbr-east-06.cleardb.net)/"+Nombre)
+	conexion, err := sql.Open(Driver, Usuario+":"+Contrasenia+"@tcp(us-cdbr-east-06.cleardb.net)/"+Nombre)*/
 	if err != nil {
 		panic(err.Error())
 	}
@@ -57,7 +70,7 @@ func Start(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "hola mundo")
 
 	conexionEstablecida := conexionDB()
-	dataEmpleado, err := conexionEstablecida.Query("SELECT id,nombre,correo FROM empleados")
+	dataEmpleado, err := conexionEstablecida.Query("SELECT id,nombre,correo FROM heroku_8c0816ad800ce51.empleados")
 
 	if err != nil {
 		panic(err.Error())
@@ -81,7 +94,7 @@ func Start(w http.ResponseWriter, r *http.Request) {
 
 		listEmpleado = append(listEmpleado, empleado)
 	}
-	fmt.Println(listEmpleado)
+	//fmt.Println(listEmpleado)
 
 	templ.ExecuteTemplate(w, "index", listEmpleado)
 
@@ -98,7 +111,7 @@ func Insertar(w http.ResponseWriter, r *http.Request) {
 		nombre := r.FormValue("nombre")
 		correo := r.FormValue("correo")
 		conexionEstablecida := conexionDB()
-		insertarRegistros, err := conexionEstablecida.Prepare("INSERT INTO empleados(nombre,correo) VALUES(?,?)")
+		insertarRegistros, err := conexionEstablecida.Prepare("INSERT INTO heroku_8c0816ad800ce51.empleados(nombre,correo) VALUES(?,?)")
 
 		if err != nil {
 			panic(err.Error())
@@ -115,7 +128,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	idEmpleado := r.URL.Query().Get("id")
 	//fmt.Println(idEmpleado)
 	conexionEstablecida := conexionDB()
-	deleteRegistros, err := conexionEstablecida.Prepare("DELETE FROM empleados WHERE id=?")
+	deleteRegistros, err := conexionEstablecida.Prepare("DELETE FROM heroku_8c0816ad800ce51.empleados WHERE id=?")
 
 	if err != nil {
 		panic(err.Error())
@@ -131,7 +144,7 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	idEmpleado := r.URL.Query().Get("id")
 	//fmt.Println(idEmpleado)
 	conexionEstablecida := conexionDB()
-	data, err := conexionEstablecida.Query("SELECT * FROM empleados WHERE id=?", idEmpleado)
+	data, err := conexionEstablecida.Query("SELECT * FROM heroku_8c0816ad800ce51.empleados WHERE id=?", idEmpleado)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -162,7 +175,7 @@ func Actualizar(w http.ResponseWriter, r *http.Request) {
 		nombre := r.FormValue("nombre")
 		correo := r.FormValue("correo")
 		conexionEstablecida := conexionDB()
-		editarRegistros, err := conexionEstablecida.Prepare("UPDATE empleados SET nombre=?,correo=? WHERE id=?")
+		editarRegistros, err := conexionEstablecida.Prepare("UPDATE heroku_8c0816ad800ce51.empleados SET nombre=?,correo=? WHERE id=?")
 
 		if err != nil {
 			panic(err.Error())
